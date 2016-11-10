@@ -1,9 +1,15 @@
 'use strict';
 
-const _ = require('lodash');
+// Allow dependencies to be loaded on the server (leave at the top)
+if (typeof window === 'undefined') {
+  var _ = require('lodash');
+}
 
 function J$ (selector) {
 
 }
 
-module.exports = J$;
+// Allow tests to run on the server (leave at the bottom)
+if (typeof window === 'undefined') {
+  module.exports = J$;
+}

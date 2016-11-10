@@ -1,11 +1,11 @@
 'use strict';
 
+const J$ = require('../index.js'); // leave at the top
+
 const fs = require('fs');
 require('chai').should();
 require('jsdom-global')(fs.readFileSync(__dirname + '/../index.html', 'utf8'));
 const $ = require('jquery');
-
-const J$ = require('../index.js');
 
 describe('JayQuery', function () {
 
@@ -15,6 +15,18 @@ describe('JayQuery', function () {
 
   afterEach(function () {
     $('#test').remove();
+  });
+
+  describe('ready', function () {
+
+    it('should trigger the indicated handler when the HTML document is ready', function (done) {
+      J$.ready(function () {
+        done();
+      });
+      window.document.dispatchEvent(new Event('DOMContentLoaded'));
+      window.document.dispatchEvent(new Event('load'));
+    });
+
   });
 
   describe('addClass', function () {

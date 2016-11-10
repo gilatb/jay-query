@@ -23,7 +23,7 @@ The methods marked with an * need to be [“chainable“](https://en.wikipedia.o
 
 ## Getting started
 
-To install the required dependencies run `npm install`.
+To install the required dependencies run `npm install && bower install`.
 
 Now you can run the `gulp` command from the project folder: this will open the browser on `index.html`, and automagically reload the page any time you modify a js, html, or css file (if you want to disable automatic syncing, you can do it from the control panel at `http://localhost:3001/sync-options`).
 
@@ -36,6 +36,8 @@ In your implementation, for simplicity’s sake, assume that:
 - `.addClass()`, `.removeClass()`, and `.toggleClass()` only take one class per time as argument.
 
 - `.hide()`, `.show()`, and `.toggle()` neither take any argument, nor generate any “fading” effect.
+
+- In case you want to use it, keep in mind that you have [Lodash](https://lodash.com/) available in your code.
 
 ## Extra credits
 
