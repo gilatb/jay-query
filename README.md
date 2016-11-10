@@ -29,6 +29,18 @@ Now you can run the `gulp` command from the project folder: this will open the
 
 Your JavaScript code goes in `index.js`, you can use `index.html` and `style.css` to add anything useful to complete the exercise.
 
+## Notes
+
+In your implementation, for simplicity’s sake, assume that:
+
+- `.addClass()`, `.removeClass()`, and `.toggleClass()` only take one class per time as argument.
+
+- `.hide()`, `.show()`, and `.toggle()` neither take any argument, nor generate any “fading” effect.
+
 ## Extra credits
 
-Add the [`.data()`](https://api.jquery.com/data/) method and write a good test suite for it.
+- Add the [`.data()`](https://api.jquery.com/data/) method and write a good test suite for it.
+
+- Upgrade `.addClass()`, `.removeClass()`, and `.toggleClass()` so that they can take more than one class per time as argument(s).
+
+- Add a fading effect to `.hide()`, `.show()`, and `.toggle()` which should last for the number of milliseconds passed as argument.
