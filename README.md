@@ -37,8 +37,6 @@ In your implementation, for simplicity’s sake, assume that:
 
 - `.hide()`, `.show()`, and `.toggle()` neither take any argument, nor generate any “fading” effect. If you invoke `.show()` on an element that has the display property set to `hidden` or `none` it should default it to `inline`, but if it was hidden through `.hide()` it should restore the original value of its display property.
 
-- In case you want to use it, keep in mind that you have [Lodash](https://lodash.com/) available in your code.
-
 ## Extra credits
 
 - Add the [`.data()`](https://api.jquery.com/data/) method and write a good test suite for it.

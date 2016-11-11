@@ -4,7 +4,7 @@ const J$ = require('../index.js'); // leave at the top
 
 const fs = require('fs');
 require('chai').should();
-require('jsdom-global')(fs.readFileSync(__dirname + '/../index.html', 'utf8'));
+require('jsdom-global')(fs.readFileSync(__dirname + '/mock.html', 'utf8'));
 const $ = require('jquery');
 
 describe('JayQuery', function () {
@@ -52,17 +52,18 @@ describe('JayQuery', function () {
       $('.test').hasClass('foo').should.be.false;
       J$('.test').addClass('foo');
       $('.foo').length.should.equal(num);
-
     });
 
     it('should not add the class if already present', function () {
       J$('.test').addClass('test');
-      $('.test')[0].classList.length.should.equal(1);
+      $('.test')[0].className.match(/test/g).length.should.equal(1);
     });
 
     it('should not remove other existing classes', function () {
+      J$('.test').addClass('foo1');
       J$('.test').addClass('foo');
       $('.test').length.should.equal(num);
+      $('.foo').length.should.equal(num);
     });
 
   });
@@ -76,9 +77,11 @@ describe('JayQuery', function () {
     });
 
     it('should not remove other existing classes', function () {
+      $('.test').addClass('foo1');
       $('.test').addClass('foo');
       J$('.test').removeClass('foo');
       $('.test').length.should.equal(num);
+      $('.foo1').length.should.equal(num);
     });
 
   });
@@ -92,8 +95,10 @@ describe('JayQuery', function () {
     });
 
     it('should not remove other existing classes', function () {
+      J$('.test').toggleClass('foo1');
       J$('.test').toggleClass('foo');
       $('.test').length.should.equal(num);
+      $('.foo1').length.should.equal(num);
     });
 
   });
