@@ -27,11 +27,13 @@ describe('JayQuery', function () {
   describe('ready', function () {
 
     it('should trigger the indicated handler when the HTML document is ready', function (done) {
+      let domReady;
       J$.ready(function () {
-        done();
+        if (domReady) done();
       });
-      window.document.dispatchEvent(new Event('DOMContentLoaded'));
-      window.document.dispatchEvent(new Event('load'));
+      domReady = true;
+      document.dispatchEvent(new Event('DOMContentLoaded'));
+      document.dispatchEvent(new Event('load'));
     });
 
   });
