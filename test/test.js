@@ -7,11 +7,11 @@ require('chai').should();
 require('jsdom-global')(fs.readFileSync(__dirname + '/mock.html', 'utf8'));
 const $ = require('jquery');
 
-describe('JayQuery', function () {
+describe('JayQuery', () => {
 
   let num;
 
-  beforeEach(function () {
+  beforeEach(() => {
     $('body').append(`
     <div class="test"></div>
     <div class="test"></div>
@@ -20,48 +20,46 @@ describe('JayQuery', function () {
     num = 3;
   });
 
-  afterEach(function () {
-    $('.test').remove();
-  });
+  afterEach(() => $('.test').remove());
 
-  describe('ready', function () {
+  describe('ready', () => {
 
-    it('should trigger the indicated handler when the HTML document is ready', function (done) {
-      let domReady;
-      J$.ready(function () {
-        if (domReady) done();
-      });
-      domReady = true;
-      document.dispatchEvent(new Event('DOMContentLoaded'));
-      document.dispatchEvent(new Event('load'));
-    });
+    it(
+      'should trigger the indicated handler when the HTML document is ready', done => {
+        let domReady;
+        J$.ready(() => (domReady && done()));
+        domReady = true;
+        document.dispatchEvent(new Event('DOMContentLoaded'));
+        document.dispatchEvent(new Event('load'));
+      }
+    );
 
   });
 
-  describe('selector', function () {
+  describe('selector', () => {
 
-    it('should select all the HTML elements that match selector', function () {
-      var num = $('.test').length;
+    it('should select all the HTML elements that match selector', () => {
+      const num = $('.test').length;
       J$('.test').length.should.equal(num);
       J$('no').length.should.equal(0);
     });
 
   });
 
-  describe('addClass', function () {
+  describe('addClass', () => {
 
-    it('should add the indicated class', function () {
+    it('should add the indicated class', () => {
       $('.test').hasClass('foo').should.be.false;
       J$('.test').addClass('foo');
       $('.foo').length.should.equal(num);
     });
 
-    it('should not add the class if already present', function () {
+    it('should not add the class if already present', () => {
       J$('.test').addClass('test');
       $('.test')[0].className.match(/test/g).length.should.equal(1);
     });
 
-    it('should not remove other existing classes', function () {
+    it('should not remove other existing classes', () => {
       J$('.test').addClass('foo1');
       J$('.test').addClass('foo');
       $('.test').length.should.equal(num);
@@ -70,15 +68,15 @@ describe('JayQuery', function () {
 
   });
 
-  describe('removeClass', function () {
+  describe('removeClass', () => {
 
-    it('should remove the indicated class', function () {
+    it('should remove the indicated class', () => {
       $('.test').addClass('foo');
       J$('.test').removeClass('foo');
       $('.foo').length.should.equal(0);
     });
 
-    it('should not remove other existing classes', function () {
+    it('should not remove other existing classes', () => {
       $('.test').addClass('foo1');
       $('.test').addClass('foo');
       J$('.test').removeClass('foo');
@@ -88,15 +86,15 @@ describe('JayQuery', function () {
 
   });
 
-  describe('toggleClass', function () {
+  describe('toggleClass', () => {
 
-    it('should toggle the indicated class', function () {
+    it('should toggle the indicated class', () => {
       $($('.test')[0]).addClass('foo');
       J$('.test').toggleClass('foo');
       $('.foo').length.should.equal(num - 1);
     });
 
-    it('should not remove other existing classes', function () {
+    it('should not remove other existing classes', () => {
       J$('.test').toggleClass('foo1');
       J$('.test').toggleClass('foo');
       $('.test').length.should.equal(num);
@@ -105,9 +103,9 @@ describe('JayQuery', function () {
 
   });
 
-  describe('hide', function () {
+  describe('hide', () => {
 
-    it('should hide the elements', function () {
+    it('should hide the elements', () => {
       J$('.test').hide();
       $('.test').each(function () {
         $(this).css('display').should.equal('none');
@@ -116,9 +114,9 @@ describe('JayQuery', function () {
 
   });
 
-  describe('show', function () {
+  describe('show', () => {
 
-    it('should default to "inline" if the elements are not visible', function () {
+    it('should default to "inline" if the elements are not visible', () => {
       $('.test').hide();
       J$('.test').show();
       $('.test').each(function () {
@@ -126,7 +124,7 @@ describe('JayQuery', function () {
       });
     });
 
-    it('should not change the display property when the elements are already visible', function () {
+    it('should not change the display property when the elements are already visible', () => {
       $($('.test')[0]).css('display', 'flex');
       J$('.test').show();
       $($('.test')[0]).css('display').should.equal('flex');
@@ -135,9 +133,9 @@ describe('JayQuery', function () {
 
   });
 
-  describe('hide and show', function () {
+  describe('hide and show', () => {
 
-    it('should keep the original display property if "show" is applied after "hide"', function () {
+    it('should keep the original display property if "show" is applied after "hide"', () => {
       $($('.test')[0]).css('display', 'flex');
       J$('.test').hide();
       J$('.test').show();
@@ -147,9 +145,9 @@ describe('JayQuery', function () {
 
   });
 
-  describe('toggle', function () {
+  describe('toggle', () => {
 
-    it('should toggle the elements visibility', function () {
+    it('should toggle the elements visibility', () => {
       $($('.test')[0]).css('display', 'flex');
       J$('.test').toggle();
       $('.test').each(function () {
@@ -162,9 +160,9 @@ describe('JayQuery', function () {
 
   });
 
-  describe('click', function () {
+  describe('click', () => {
 
-    it('should trigger the indicated handler when the elements are clicked', function () {
+    it('should trigger the indicated handler when the elements are clicked', () => {
       let called = 0;
       function test () {
         called++;
@@ -177,9 +175,9 @@ describe('JayQuery', function () {
 
   });
 
-  describe('append', function () {
+  describe('append', () => {
 
-    it('should append the indicated content to the elements', function () {
+    it('should append the indicated content to the elements', () => {
       const node1 = '<h1>Hello</h1>';
       const node2 = '<h2>Bye</h2>';
       J$('.test').append(node1);
@@ -192,7 +190,7 @@ describe('JayQuery', function () {
       });
     });
 
-    it('should append HTML elements when the string is HTML', function () {
+    it('should append HTML elements when the string is HTML', () => {
       const node1 = '<h1>Hello</h1>';
       J$('.test').append(node1);
       $('h1').length.should.equal(num);
@@ -200,9 +198,9 @@ describe('JayQuery', function () {
 
   });
 
-  describe('text', function () {
+  describe('text', () => {
 
-    it('should insert the indicated content as text', function () {
+    it('should insert the indicated content as text', () => {
       const text1 = 'Hello';
       J$('.test').text(text1);
       $('.test').each(function () {
@@ -210,7 +208,7 @@ describe('JayQuery', function () {
       });
     });
 
-    it('should replace the existing content', function () {
+    it('should replace the existing content', () => {
       const text1 = 'Hello';
       const text2 = 'Bye';
       J$('.test').text(text1);
@@ -220,7 +218,7 @@ describe('JayQuery', function () {
       });
     });
 
-    it('should not convert to HTML elements when the string is HTML', function () {
+    it('should not convert to HTML elements when the string is HTML', () => {
       const node1 = '<h1>Hello</h1>';
       J$('.test').text(node1);
       $('h1').length.should.equal(0);
@@ -229,4 +227,3 @@ describe('JayQuery', function () {
   });
 
 });
-

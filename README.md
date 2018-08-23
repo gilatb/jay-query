@@ -19,15 +19,15 @@ The returned collection should provide the following methods:
 - [`.text()`](https://api.jquery.com/text/) *
 
 
-The methods marked with an * need to be [“chainable“](https://en.wikipedia.org/wiki/Method_chaining).
+The methods marked with a “*” need to be “[chainable](https://en.wikipedia.org/wiki/Method_chaining)”.
 
 ## Getting started
 
-To install the required dependencies run `npm install && bower install`.
+To install the required dependencies run `npm install`.
 
 Now you can run the `gulp` command from the project folder: this will open the browser on `index.html`, and automagically reload the page any time you modify a js, html, or css file (if you want to disable automatic syncing, you can do it from the control panel at `http://localhost:3001/sync-options`).
 
-Your JavaScript code goes in `index.js`, you can use `index.html` and `style.css` to add anything useful to complete the exercise.
+Your JavaScript code goes in `index.js`, you can modify `index.html` or create a `style.css` in case it’s useful to complete the exercise.
 
 ## Notes
 
@@ -41,6 +41,6 @@ In your implementation, for simplicity’s sake, assume that:
 
 - Add the [`.data()`](https://api.jquery.com/data/) method and write a good test suite for it.
 
-- Upgrade `.addClass()`, `.removeClass()`, and `.toggleClass()` so that they can take more than one class per time as argument(s).
+- Upgrade `.addClass()`, `.removeClass()`, and `.toggleClass()` so that they can take more than one class per time as argument.
 
 - Add a fading effect to `.hide()`, `.show()`, and `.toggle()` which should last for the number of milliseconds passed as argument.
